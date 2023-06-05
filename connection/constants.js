@@ -1,0 +1,9 @@
+module.exports=
+{
+    user_Base:"User_Base",
+    admin_Base:"Admin_base",
+    product_Base:"Product_Base",
+    product_Base_Duplicate:"Products_Base_Duplicate",
+    cart_Base:"Cart_Base",
+    orders_Base:"Orders_Base"
+}

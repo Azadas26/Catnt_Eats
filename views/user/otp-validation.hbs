@@ -1,0 +1,48 @@
+<div class="background">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12 " style="height: 100%;">
+                <div class="">
+                    <div class="m-auto"
+                        style="width: 60%; box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px; border-radius: 20px;">
+                        <form action="/otp" method="post" class="mt-5 p-5" style="color: #0c0c0c;">
+                            <h1 style="text-align: center; font-family: serif;"><b><i>OTP VERIFICATION</i></b>
+                            </h1>
+                            <div class="form-group">
+                            {{#if otperr}}
+                            <p class="mt-2" style="color: red;"><i>{{otperr}}</i></p>
+                            {{/if}}
+                                <label for="exampleInputEmail1">Enter Otp</label>
+                                <input type="number" name="otp" class="form-control"
+                                    aria-describedby="emailHelp" placeholder="Enter email">                              
+                            </div>  
+                            <div class="form-group">
+                                <a href="/reotp">re-generate otp</a>
+                            </div>
+                            <div class="">
+                                <button type="submit" class="btn btn-success mt-3"
+                                    style="width: 100%; "><b>Submit</b></button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<style>
+    .background {
+        background-image: url('/images/otp.webp');
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-position: right;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100%;
+
+
+    }
+</style>

@@ -1,0 +1,64 @@
+<div class="background" style="margin: 0;padding: 0;">
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12  mt-5">
+                <div class="">
+                    <div class="m-auto"
+                        style="width: 60%; box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px; border-radius: 20px;">
+                        <form action="/signup" method="post" style="color: #fff;" class=" p-5 text-dark">
+                            <h1 style="text-align: center; font-family: serif;"><b><i>Create Your Account</i></b>
+                            </h1>
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">Name</label>
+                                <input type="text" name="name" class="form-control" id="exampleInputEmail1"
+                                    aria-describedby="emailHelp" placeholder="Name">
+
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">Phone Number</label>
+                                <input type="number" name="ph" class="form-control" id="exampleInputEmail1"
+                                    aria-describedby="emailHelp" placeholder="Eg: +91 95XXXXXX76">
+                                <small id="emailHelp" class="form-text text-muted">We'll never share your phone number
+                                    with
+                                    anyone
+                                    else.</small>
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">Email address</label>
+                                <input type="email" name="email" class="form-control" id="exampleInputEmail1"
+                                    aria-describedby="emailHelp" placeholder="Enter email">
+                                <small id="emailHelp" class="form-text text-muted">We'll never share your email with
+                                    anyone
+                                    else.</small>
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputPassword1">Password</label>
+                                <input type="password" name="password" class="form-control" id="exampleInputPassword1"
+                                    placeholder="Password">
+                            </div>
+
+                            <button type="submit" class="btn btn-outline-success mt-3"
+                                style="width: 100%;"><b>Submit</b></button>
+                        </form>
+                    </div>
+                </div>
+            </div>  
+        </div>
+    </div>
+
+</div>
+
+<style>
+    .background {
+        background-image: url('/images/signup.jpg');
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: right;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100%;
+
+    }
+</style>
