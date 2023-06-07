@@ -1,0 +1,51 @@
+<div class="background">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12 " style="height: 100%;">
+                <div class="">
+                    <div class="m-auto"
+                        style="width: 60%; box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px; border-radius: 20px;">
+                        <form action="/admin/login" method="post" class="mt-5 p-5 text-light" style="color: #0c0c0c;">
+                            <h1 style="text-align: center; font-family: serif;" class="text-light"><b><i>Admin Login</i></b>
+                            </h1>
+                            <div class="form-group">
+                                {{#if err}}
+                                <p class="mt-2" style="color: red;"><i>{{err}}</i></p>
+                                {{/if}}
+                                <label for="exampleInputEmail1">User Name</label>
+                                <input type="text" name="name" class="form-control" id="exampleInputEmail1"
+                                    aria-describedby="emailHelp" placeholder="User Name">
+                                <small id="emailHelp" class="form-text text-muted">We'll never share your email with
+                                    anyone
+                                    else.</small>
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputPassword1">Password</label>
+                                <input type="password" name="password" class="form-control" id="exampleInputPassword1"
+                                    placeholder="Password">
+
+                            </div>
+                            <div class="">
+                                <button type="submit" class="btn btn-outline-primary mt-3"
+                                    style="width: 100%;"><b>Submit</b></button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .background {
+        background-image: linear-gradient(to bottom, #000000, #3b3b3b, #767575, #b7b6b6, #fdfbfb);
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: right;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100%;
+    }
+</style>

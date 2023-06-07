@@ -1,0 +1,163 @@
+<div class="container-fluid">
+    <div class="row pt-5">
+        <div class="col-md-6 mt-5 pt-5 m-auto">
+            <div class="pb-5 pl-5 pr-5"
+                style="border-radius: 20px; box-shadow: rgba(254, 252, 252, 0.25) 0px 54px 55px, rgba(218, 217, 217, 0.12) 0px -12px 30px, rgba(227, 225, 225, 0.12) 0px 4px 6px, rgba(193, 192, 192, 0.17) 0px 12px 13px, rgba(167, 167, 167, 0.09) 0px -3px 5px;">
+                <form action="/placeorder" method="post" id="payment" class="mt-5 text-light">
+                    <h1 class="p-5 text-center">Payment Form</h1>
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Name</label>
+                        <input type="text" name="name" class="form-control" id="exampleInputEmail1"
+                            aria-describedby="emailHelp" placeholder="Enter email">
+
+                    </div>
+
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Address</label>
+                        <input type="text" name="address" class="form-control" id="exampleInputEmail1"
+                            aria-describedby="emailHelp" placeholder="Enter email">
+
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputPassword1">Location</label>
+                        <input type="text" name="location" class="form-control" id="exampleInputPassword1"
+                            placeholder="location">
+                    </div>
+
+
+
+
+
+                    <div class="">
+                        <h4>Total : {{total}}/-</h4> <br>
+
+                        <h4>Choose Payment method</h4>
+
+                        <input type="radio" name="pay" value="cod">
+                        <label for="">Cash Own delivery</label> <br>
+
+                        <input type="radio" name="pay" value="online">
+                        <label for="">Online Payment</label> <br> <br>
+
+                        <button type="submit" class="btn btn-outline-primary" style="width: 100%;">Submit</button>
+                    </div>
+
+                </form>
+
+            </div>
+
+        </div>
+    </div>
+
+
+
+    <script>
+
+        $("#payment").submit((e) => {
+            e.preventDefault()
+            $.ajax({
+
+                url: '/placeorder',
+                method: 'post',
+                data: $('#payment').serialize(),
+                success: (response) => {
+                    if (response.codstatus) {
+                        location.href = '/afterplaced'
+                    }
+                    else {
+
+
+                        Placeorder(response)
+                    }
+                }
+            })
+        })
+
+
+
+
+        function Placeorder(order) {
+
+            console.log(order)
+            var options = {
+                "key": "rzp_test_lBqfqkZtfYY8r3", // Enter the Key ID generated from the Dashboard
+                "amount": order.amount, // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
+                "currency": "INR",
+                "name": "Azad A S", //your business name
+                "description": "Test Transaction",
+                "image": "https://example.com/your_logo",
+                "order_id": order.id, //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
+                "handler": function (response) {
+
+
+                    verfyPayment(response, order)
+                },
+                "prefill": {
+                    "name": "Gaurav Kumar", //your customer's name
+                    "email": "gaurav.kumar@example.com",
+                    "contact": "9000090000"
+                },
+                "notes": {
+                    "address": "Razorpay Corporate Office"
+                },
+                "theme": {
+                    "color": "#3399cc"
+                }
+
+
+            };
+
+            var rzp1 = new Razorpay(options);
+            rzp1.open();
+
+        }
+
+        function verfyPayment(payment, order) {
+
+            $.ajax({
+                url: '/verfypay',
+                data: {
+                    payment,
+                    order
+                },
+                method: 'post',
+                success: (response) => {
+
+                    if (response.status) {
+                        location.href = '/afterplaced'
+                    }
+                    else {
+                        alert("Payment Faild...")
+                    }
+                }
+
+
+            })
+        }
+
+        $(document).ready(() => {
+            $("#payment").validate(
+                {
+                    rules:
+                    {
+                        name:
+                        {
+                            required: true
+                        },
+                        address:
+                        {
+                            required: true
+                        },
+                        location:
+                        {
+                            required: true
+                        },
+                        pay: {
+                            required: true
+                        }
+                    }
+                }
+            )
+        })
+
+    </script>

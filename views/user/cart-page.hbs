@@ -1,0 +1,59 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12  mt-5 p-5">
+            {{#if pro}}
+            <table class="table text-light" style="text-align: center;">
+                <thead>
+                    <tr>
+                        <th scope="col">No.</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">Discription</th>
+                        <th scope="col">Price</th>
+                        <th scope="col">Quantity</th>
+                        <th scope="col">Image 1</th>
+                        <th scope="col">Image 2</th>
+                        <th scope="col">Image 3</th>
+                        <th scope="col">Choose Option</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {{#each pro}}
+
+
+                    <tr>
+                        <td>{{@index}}</td>
+
+
+                        <td class="pt-5">{{this.product.pname}}</td>
+                        <td style="max-width: 90px;">{{this.product.description}}</td>
+                        <td class="pt-5">{{this.product.price}}</td>
+                        <td class="pt-5">{{this.quantity}}</td>
+                        <td><img src="/adminpro-image/{{this.product._id}}1.jpg" style="width: 200px; height: 200px;"
+                                alt="">
+                        </td>
+                        <td><img src="/adminpro-image/{{this.product._id}}2.jpg" style="width: 200px; height: 200px;"
+                                alt="">
+                        </td>
+                        <td><img src="/adminpro-image/{{this.product._id}}3.jpg" style="width: 200px; height: 200px;"
+                                alt="">
+                        </td>
+                        <td>
+                            <a href="/removecart?id={{this.product._id}}" class="btn btn-outline-danger mt-5"
+                                onclick="return confirm(' Are you sure to Remove This Product??')">Remove</a>
+                        </td>
+                    </tr>
+                    {{/each}}
+
+                </tbody>
+            </table>
+            {{else}}
+            <h1 class="text-center text-light">Nothing Selected!</h1>
+            {{/if}}
+            <hr>
+            <div class="float-right m-5 text-light">
+                <h3>Totel ₹ : <span id="total">{{total}}</span>/-</h3>
+                <a href="/placeorder" class="btn btn-success" style="width: 100%;">Place Order</a>
+            </div>
+        </div>
+    </div>
+</div>

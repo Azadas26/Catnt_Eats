@@ -1,0 +1,201 @@
+<div class="banner" style=" background-image:url('/adminpro-image/{{pro1._id}}1.jpg')">
+    <div class="top">
+
+    </div>
+    <div class="contant">
+        <h1 class="title " style="padding: 14px; color: #FFFDD0;">{{pro1.pname}}</h1>
+        <div class="buttons">
+            <button class="button">{{pro1.price}} ₹</button>
+            <button class="button">QUT :{{pro1.qun}}</button>
+        </div>
+        <h1 class="description">
+            {{pro1.description}}
+        </h1>
+    </div>
+    <div class="bottom">
+
+    </div>
+</div>
+{{#if pro}}
+<div class="row">
+    <div style="width: 100%;">
+        <h2 class="pt-3">Havi Food</h2>
+    </div>
+
+    <div class="posters m-auto">
+        {{#each pro}}
+        <a href="/intopro?id={{this._id}}"><img src="/adminpro-image/{{this._id}}3.jpg" class="poster m-3"
+                alt="produts"></a>
+
+        {{/each}}
+    </div>
+
+</div>
+{{/if}}
+{{#if pro2}}
+<div class="row">
+    <div style="width: 100%;">
+        <h2 class="pt-3">Snaks</h2>
+    </div>
+
+    <div class="posters m-auto">
+        {{#each pro2}}
+        <a href="/intopro?id={{this._id}}"><img src="/adminpro-image/{{this._id}}3.jpg" class="poster m-3"
+                alt="produts"></a>
+
+        {{/each}}
+    </div>
+
+</div>
+{{/if}}
+{{#if pro3}}
+<div class="row">
+    <div style="width: 100%;">
+        <h2 class="pt-3">Carbonate Drinks</h2>
+    </div>
+
+    <div class="posters m-auto">
+        {{#each pro3}}
+        <a href="/intopro?id={{this._id}}"><img src="/adminpro-image/{{this._id}}3.jpg" class="poster m-3"
+                alt="produts"></a>
+
+        {{/each}}
+    </div>
+
+</div>
+{{/if}}
+{{#if pro4}}
+<div class="row">
+    <div style="width: 100%;">
+        <h2 class="pt-3">Minaral Water</h2>
+    </div>
+
+    <div class="posters m-auto">
+        {{#each pro4}}
+        <a href="/intopro?id={{this._id}}"><img src="/adminpro-image/{{this._id}}3.jpg" class="poster m-3"
+                alt="produts"></a>
+
+        {{/each}}
+    </div>
+
+</div>
+{{/if}}{#if pro5}}
+<div class="row">
+    <div style="width: 100%;">
+        <h2 class="pt-3">Candys</h2>
+    </div>
+
+    <div class="posters m-auto">
+        {{#each pro5}}
+        <a href="/intopro?id={{this._id}}"><img src="/adminpro-image/{{this._id}}3.jpg" class="poster m-3"
+                alt="produts"></a>
+
+        {{/each}}
+    </div>
+
+</div>
+{{/if}}
+{{#if pro6}}
+<div class="row">
+    <div style="width: 100%;">
+        <h2 class="pt-3">Others</h2>
+    </div>
+
+    <div class="posters m-auto">
+        {{#each pro6}}
+        <a href="/intopro?id={{this._id}}"><img src="/adminpro-image/{{this._id}}3.jpg" class="poster m-3"
+                alt="produts"></a>
+
+        {{/each}}
+    </div>
+
+</div>
+{{/if}}
+
+<style>
+    .banner {
+        background-size: cover;
+        height: 600px;
+        color: white;
+    }
+
+    .contant {
+        padding-top: 140px;
+        height: 190px;
+        padding-left: 15px;
+    }
+
+    .title {
+        font-size: 3rem;
+        font-weight: 800;
+        padding-bottom: 0.3rem;
+    }
+
+    .button {
+        color: white;
+        outline: none;
+        border: none;
+        font-weight: 700;
+        border-radius: 5px;
+        padding-left: 2rem;
+        padding-right: 2rem;
+        padding-top: 0.5rem;
+        padding-bottom: 0.5rem;
+        background-color: rgba(51, 51, 51, 0.5);
+        cursor: pointer;
+        margin-right: 1rem;
+    }
+
+    button:hover {
+        color: black;
+        background-color: #e6e6e6;
+    }
+
+    .description {
+        width: 45rem;
+        line-height: 1.3;
+        padding-top: 1rem;
+        font-size: 1rem;
+        height: 80px;
+        max-width: 360px;
+        font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+
+    }
+
+    .bottom {
+        height: 26.4rem;
+        background-image: linear-gradient(180deg, transparent, rgba(37, 37, 37, .61), #111);
+
+    }
+
+    .top {
+        height: 5.4rem;
+        background-image: linear-gradient(0deg, transparent, rgba(37, 37, 37, .61), #111);
+
+    }
+
+    .row {
+        margin-left: 20px;
+        color: #fff;
+        padding: 22px;
+    }
+
+    .posters {
+        display: flex;
+        overflow-x: scroll;
+        overflow-y: hidden;
+    }
+
+    .posters::-webkit-scrollbar {
+        display: none;
+    }
+
+    .poster {
+        max-height: 250px;
+
+    }
+
+    .poster:hover {
+        transform: scale(1.1);
+    }
+</style>

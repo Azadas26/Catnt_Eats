@@ -1,0 +1,96 @@
+<div class="container-fluid" style="background-color: #fff;">
+    <div class="row">
+        <div class="col-md-12 text-light">
+
+            <form action="/admin/add" method="post" enctype="multipart/form-data"
+                class="mt-5 pt-5 pb-5 pl-5 pr-5 text-dark" id="proform">
+                <h1 class="text-center" style="font-family: serif;"><b>Add Your Product</b></h1>
+                <div class="form-group mt-4">
+                    <label for="exampleInputEmail1">Product Name</label>
+                    <input type="text" name="pname" class="form-control" id="exampleInputEmail1"
+                        aria-describedby="emailHelp" placeholder="Chicken Biryani">
+
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputPassword1">Product Type&emsp;:&emsp;</label>
+                    <select name="type" id="cars">
+                        <option value="Havi_food">Havi Food</option>
+                        <option value="Snacks">Snacks</option>
+                        <option value="Carbonate_drinks">Carbonate Drinks</option>
+                        <option value="Minaral_water">Minaral Water</option>
+                        <option value="Candy">Candys</option>
+                        <option value="Others">Others</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputPassword1">Quantity</label>
+                    <input type="number" name="qun" class="form-control" id="exampleInputPassword1"
+                        placeholder="Product available count">
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputPassword1">Product Price ₹</label>
+                    <input type="number" name="price" class="form-control" id="exampleInputPassword1"
+                        placeholder="150/-">
+                </div>
+                <div class="form-group pt-3">
+                    <label for="exampleInputPassword1">Description</label>
+                    <input style="height: 100px;" name="description" type="text" class="form-control"
+                        id="exampleInputPassword1"
+                        placeholder="Eg : Biryani: The Most Lovable and Famous Dish - Amritsr Restaurant
+Biryani is popular because of: Its rich flavour. It is a hearty meal that one can enjoy at any hour of the day or night.">
+                </div>
+                <div class="form-group pt-3">
+                    <label for="exampleInputPassword1">Product Image 1</label>
+                    <input type="file" name="image1" class="form-control" id="exampleInputPassword1"
+                        placeholder="image1">
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputPassword1">Product Image 2</label>
+                    <input type="file" name="image2" class="form-control" id="exampleInputPassword1"
+                        placeholder="image2">
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputPassword1">Product Image 3</label>
+                    <input type="file" name="image3" class="form-control" id="exampleInputPassword1"
+                        placeholder="image3">
+                </div>
+
+                <button type="submit" class="btn btn-primary mt-3" style="width: 100%;">Submit</button>
+            </form>
+        </div>
+
+    </div>
+</div>
+
+<script>
+    $(document).ready(() => {
+        $("#proform").validate({
+            rules: {
+                pname: {
+                    required: true,
+                },
+                qun: {
+                    required: true
+                },
+                price: {
+                    required: true
+                },
+                description:
+                {
+                    required: true,
+                    minlength: 50,
+                    maxlength: 500
+                },
+                image1: {
+                    required: true
+                },
+                image2: {
+                    required: true
+                },
+                image3: {
+                    required: true
+                }
+            }
+        })
+    })
+</script>

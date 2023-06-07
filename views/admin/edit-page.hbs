@@ -1,0 +1,63 @@
+<div class="container-fluid" style="background-color: #fff;">
+    <div class="row">
+        <div class="col-md-12 text-light">
+
+            <form action="/admin/edit?id={{pro._id}}" method="post" enctype="multipart/form-data"
+                class="mt-5 pt-5 pb-5 pl-5 pr-5 text-dark" >
+                <h1 class="text-center" style="font-family: serif;"><b>Add Your Product</b></h1>
+                <div class="form-group mt-4">
+                    <label for="exampleInputEmail1">Product Name</label>
+                    <input type="text" name="pname" class="form-control" id="exampleInputEmail1"
+                        aria-describedby="emailHelp" value="{{pro.pname}}">
+
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputPassword1">Product Type&emsp;:&emsp;</label>
+                    <select name="type" id="cars">
+                        <option value="Havi_food">Havi Food</option>
+                        <option value="Snacks">Snacks</option>
+                        <option value="Carbonate_drinks">Carbonate Drinks</option>
+                        <option value="Minaral_water">Minaral Water</option>
+                        <option value="Candy">Candys</option>
+                        <option value="Others">Others</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputPassword1">Quantity</label>
+                    <input type="number" name="qun" class="form-control" id="exampleInputPassword1"
+                        value="{{pro.qun}}">
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputPassword1">Product Price ₹</label>
+                    <input type="number" name="price" class="form-control" id="exampleInputPassword1"
+                        value="{{pro.price}}">
+                </div>
+                <div class="form-group pt-3">
+                    <label for="exampleInputPassword1">Description</label>
+                    <input style="height: 100px;" name="description" type="text" class="form-control"
+                        id="exampleInputPassword1"
+                        value="{{pro.description}}">
+                </div>
+                <div class="form-group pt-3">
+                    <label for="exampleInputPassword1">Product Image 1</label>
+                    <input type="file" name="image1" class="form-control" id="exampleInputPassword1"
+                        placeholder="image1">
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputPassword1">Product Image 2</label>
+                    <input type="file" name="image2" class="form-control" id="exampleInputPassword1"
+                        placeholder="image2">
+                </div>
+                <div class="form-group">
+                    <label for="exampleInputPassword1">Product Image 3</label>
+                    <input type="file" name="image3" class="form-control" id="exampleInputPassword1"
+                        placeholder="image3">
+                </div>
+
+                <button type="submit" class="btn btn-primary mt-3" style="width: 100%;">Submit</button>
+            </form>
+        </div>
+
+    </div>
+</div>
+

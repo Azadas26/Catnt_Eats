@@ -6,10 +6,14 @@
                 <div class="">
                     <div class="m-auto"
                         style="width: 60%; box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px; border-radius: 20px;">
-                        <form action="/signup" method="post" style="color: #fff;" class=" p-5 text-dark">
+                        <form action="/signup" method="post" style="color: #fff;" class=" p-5 text-dark"
+                            id="usersignup">
                             <h1 style="text-align: center; font-family: serif;"><b><i>Create Your Account</i></b>
                             </h1>
                             <div class="form-group">
+                                {{#if mail}}
+                                <p class="mt-2" style="color: red;"><i>{{mail}}...</i></p>
+                                {{/if}}
                                 <label for="exampleInputEmail1">Name</label>
                                 <input type="text" name="name" class="form-control" id="exampleInputEmail1"
                                     aria-describedby="emailHelp" placeholder="Name">
@@ -43,7 +47,7 @@
                         </form>
                     </div>
                 </div>
-            </div>  
+            </div>
         </div>
     </div>
 
@@ -62,3 +66,26 @@
 
     }
 </style>
+
+<script>
+    $(document).ready(() => {
+        $("#usersignup").validate({
+            rules: {
+                name: {
+                    required: true,
+                    minlength: 5,
+                },
+                ph: {
+                    required: true,
+                    minlength: 10,
+                    maxlength: 10,
+                },
+                password:{
+                    required:true,
+                    minlength:3,
+                    maxlength:10
+                }
+            }
+        })
+    })
+</script>
