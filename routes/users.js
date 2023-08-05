@@ -5,6 +5,7 @@ const nodemailer = require('nodemailer');
 const twilio = require('twilio');
 const userbase = require('../database/user_base');
 const session = require('express-session');
+const { LogContextImpl } = require('twilio/lib/rest/serverless/v1/service/environment/log');
 const objectId = require('mongodb').ObjectId
 
 const verfyUserLogin = (req, res, next) => {
@@ -31,9 +32,9 @@ var successcut = false
 router.get('/', function (req, res, next) {
   if (req.session.status) {
     userbase.Get_Cart_Count(req.session.user._id).then((count) => {
-      userbase.Get_Products({ type: "Havi_food" }).then((pro) => {
+      userbase.Get_Products({ type: "Heavy_food" }).then((pro) => {
         var pro1 = pro[0]
-        pro.shift()
+       // pro.shift()
         //console.log(pro);
         userbase.Get_Products({ type: "Snacks" }).then((pro2) => {
           userbase.Get_Products({ type: "Carbonate_drinks" }).then((pro3) => {
@@ -57,10 +58,11 @@ router.get('/', function (req, res, next) {
     })
   }
   else {
-    userbase.Get_Products({ type: "Havi_food" }).then((pro) => {
+    userbase.Get_Products({ type: "Heavy_food" }).then((pro) => {
       var pro1 = pro[0]
-      pro.shift()
-      //console.log(pro);
+      // pro.shift()
+      console.log(pro);
+      // console.log(pro);
       userbase.Get_Products({ type: "Snacks" }).then((pro2) => {
         userbase.Get_Products({ type: "Carbonate_drinks" }).then((pro3) => {
           userbase.Get_Products({ type: "Minaral_water" }).then((pro4) => {
@@ -112,7 +114,9 @@ router.post('/signup', (req, res) => {
 
 
       const accountSid = 'AC86bf867d4974f0444cb887bebebdebda';
-      const authToken = '0645e81ff1a6d7c656d91c6e157e4700';
+      
+      const authToken = '1f61bc99e54d15bd7141adb29054e88f';
+      
       const twilioPhoneNumber = '+13158886211';
 
       function generateOTP() {
@@ -347,11 +351,9 @@ router.post('/verfypay', (req, res) => {
     res.json({ status: false })
   })
 })
-router.get('/removecart',(req,res)=>
-{
-  userbase.Remove_cart_product(req.query.id,req.session.user._id).then((data)=>
-  {
-     res.redirect('/viewcart')
+router.get('/removecart', (req, res) => {
+  userbase.Remove_cart_product(req.query.id, req.session.user._id).then((data) => {
+    res.redirect('/viewcart')
   })
 })
 

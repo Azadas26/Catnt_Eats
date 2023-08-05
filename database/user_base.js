@@ -76,9 +76,10 @@ module.exports =
     },
     Get_Products: (tp) => {
         return new Promise(async (resolve, reject) => {
+            // console.log(tp);
             var pro = await db.get().collection(consts.product_Base).find({ type: tp.type }).toArray()
             resolve(pro)
-            //console.log(pro);
+            // console.log(pro);
         })
     },
     Get_Single_Products: (Id) => {
@@ -227,15 +228,13 @@ module.exports =
                 }
             ]).toArray()
             console.log(total);
-            if (total[0])
-            {
+            if (total[0]) {
                 resolve(total[0].totalAmount)
             }
-            else
-            {
+            else {
                 resolve(0)
             }
-            
+
         })
     },
     Get_products_From_Cart_Base: (userId) => {
@@ -253,7 +252,7 @@ module.exports =
         })
     },
     Generate__Razopay: (orderId, total) => {
-        console.log("Hiii azaddd",orderId,total);
+        console.log("Hiii azaddd", orderId, total);
         return new Promise((resolve, reject) => {
 
             instance.orders.create({

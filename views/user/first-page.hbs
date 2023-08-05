@@ -1,4 +1,4 @@
-<div class="banner" style=" background-image:url('/adminpro-image/{{pro1._id}}1.jpg')">
+<div class="banner img-fluid" style="">
     <div class="top">
 
     </div>
@@ -19,12 +19,12 @@
 {{#if pro}}
 <div class="row">
     <div style="width: 100%;">
-        <h2 class="pt-3">Havi Food</h2>
+        <h2 class="pt-3">Heavy Food</h2>
     </div>
 
     <div class="posters m-auto">
         {{#each pro}}
-        <a href="/intopro?id={{this._id}}"><img src="/adminpro-image/{{this._id}}3.jpg" class="poster m-3"
+        <a href="/intopro?id={{this._id}}"><img src="/adminpro-image/{{this._id}}1.jpg" class="poster m-3"
                 alt="produts"></a>
 
         {{/each}}
@@ -40,7 +40,7 @@
 
     <div class="posters m-auto">
         {{#each pro2}}
-        <a href="/intopro?id={{this._id}}"><img src="/adminpro-image/{{this._id}}3.jpg" class="poster m-3"
+        <a href="/intopro?id={{this._id}}"><img src="/adminpro-image/{{this._id}}1.jpg" class="poster m-3"
                 alt="produts"></a>
 
         {{/each}}
@@ -79,7 +79,7 @@
     </div>
 
 </div>
-{{/if}}{#if pro5}}
+{{/if}}{{#if pro5}}
 <div class="row">
     <div style="width: 100%;">
         <h2 class="pt-3">Candys</h2>
@@ -114,9 +114,14 @@
 
 <style>
     .banner {
-        background-size: cover;
+
         height: 600px;
         color: white;
+        width: 100%;
+        background-image:url('/adminpro-image/{{pro1._id}}3.jpg');
+        background-size: 119rem 50rem;
+        background-repeat: no-repeat;
+
     }
 
     .contant {
