@@ -79,7 +79,7 @@ module.exports =
             // console.log(tp);
             var pro = await db.get().collection(consts.product_Base).find({ type: tp.type }).toArray()
             resolve(pro)
-             console.log(pro);
+            console.log(pro);
         })
     },
     Get_Single_Products: (Id) => {
@@ -366,14 +366,18 @@ module.exports =
                 })
         })
     },
-    Admin_Message : (userId)=>
-    {
-        return new Promise(async(resolve,reject)=>
-        {
+    Admin_Message: (userId) => {
+        return new Promise(async (resolve, reject) => {
             console.log(userId);
-            var msg = await db.get().collection(consts.adminmessage).findOne({ UserId: objectId(userId)})
-             console.log(msg);
-             resolve(msg.message)
+            var msg = await db.get().collection(consts.adminmessage).findOne({ UserId: objectId(userId) })
+            console.log(msg);
+            if (msg) {
+
+                resolve(msg.message)
+            }
+            else {
+                resolve(null)
+            }
         })
     }
 }

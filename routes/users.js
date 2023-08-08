@@ -34,19 +34,17 @@ var successcut = false
 router.get('/', function (req, res, next) {
   if (req.session.status) {
     userbase.Get_Cart_Count(req.session.user._id).then((count) => {
-      userbase.Admin_Message(req.session.user._id).then((msg) => {
-        userbase.Get_Products({ type: "Heavy_food" }).then((pro) => {
-          var pro1 = pro[0]
-          // pro.shift()
-          //console.log(pro);
-          userbase.Get_Products({ type: "Snacks" }).then((pro2) => {
-            userbase.Get_Products({ type: "Carbonate_drinks" }).then((pro3) => {
-              userbase.Get_Products({ type: "Minaral_water" }).then((pro4) => {
-                userbase.Get_Products({ type: "Candy" }).then((pro5) => {
-                  userbase.Get_Products({ type: "Others" }).then((pro6) => {
-                    res.render('./user/first-page', { msg, admin: false, user: req.session.user, pro1, pro, pro2, pro3, pro4, pro5, pro6, count })
-
-                  })
+      userbase.Admin_Message(req.session.user._id).then((msg)=>{
+      userbase.Get_Products({ type: "Heavy_food" }).then((pro) => {
+        var pro1 = pro[0]
+        // pro.shift()
+        //console.log(pro);
+        userbase.Get_Products({ type: "Snacks" }).then((pro2) => {
+          userbase.Get_Products({ type: "Carbonate_drinks" }).then((pro3) => {
+            userbase.Get_Products({ type: "Minaral_water" }).then((pro4) => {
+              userbase.Get_Products({ type: "Candy" }).then((pro5) => {
+                userbase.Get_Products({ type: "Others" }).then((pro6) => {
+                  res.render('./user/first-page', { msg,admin: false, user: req.session.user, pro1, pro, pro2, pro3, pro4, pro5, pro6, count })
 
                 })
 
@@ -55,7 +53,9 @@ router.get('/', function (req, res, next) {
             })
 
           })
+
         })
+      })
 
       })
     })
@@ -118,7 +118,7 @@ router.post('/signup', (req, res) => {
 
       const accountSid = 'AC86bf867d4974f0444cb887bebebdebda';
 
-      const authToken = '1f61bc99e54d15bd7141adb29054e88f';
+      const authToken = 'a2da31ad592d978592ddcf7d34b7e951';
 
       const twilioPhoneNumber = '+13158886211';
 
@@ -321,7 +321,7 @@ router.post('/placeorder', (req, res) => {
       req.body.total = total;
       req.body.status = req.body.pay === 'cod' ? 'placed' : 'penting';
       console.log(req.body);
-      userbase.Get_order_placement(req.body).then(async (orderId) => {
+      userbase.Get_order_placement(req.body).then(async(orderId) => {
 
         await qrcode.GenerateOrder_Qr_Code(orderId).then((data) => { console.log(data); })
         if (req.body.pay === 'cod') {
@@ -344,7 +344,7 @@ router.get('/afterplaced', (req, res) => {
 
 router.get('/vieworder', verfyUserLogin, (req, res) => {
   userbase.View_Orders_fROM_ORDER_bASE(req.session.user._id).then((info) => {
-    console.log(info);
+     console.log(info);
 
     res.render('./user/view-order', { admin: false, info, user: req.session.user })
   })
