@@ -258,33 +258,20 @@ module.exports =
         })
     },
     Admin_Message_TO_Usewr: (userId, proId, msg) => {
-        return new Promise(async(resolve, reject) => {
-            var obj =await db.get().collection(consts.adminmessage).findOne({ UserId: objectId(userId) })
-            if (obj) {
-                db.get().collection(consts.adminmessage).updateOne({ ProId: objectId(proId) },
-                    {
-                        $push:
-                        {
-                            message: msg
-                        }
-                    }).then((data)=>
-                    {
-                        resolve(data)
-                    })
+        return new Promise(async (resolve, reject) => {
+            console.log("Hello worldd");
+            var state =
+            {
+                UserId: objectId(userId),
+                ProId: objectId(proId),
+                message: msg,
+                Date: new Date()
             }
-            else {
-                console.log("Hello worldd");
-                var state =
-                {
-                    UserId: objectId(userId),
-                    ProId: objectId(proId),
-                    message: [msg]
-                }
-                db.get().collection(consts.adminmessage).insertOne(state).then((data) => {
-                    resolve(data)
-                    console.log(data);
-                })
-            }
+            db.get().collection(consts.adminmessage).insertOne(state).then((data) => {
+                resolve(data)
+                console.log(data);
+            })
+
         })
     }
 }
