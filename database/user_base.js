@@ -379,5 +379,66 @@ module.exports =
                 resolve(null)
             }
         })
+    },
+    Get_user_message_From_admin: (userId) => {
+        return new Promise(async (resolve, reject) => {
+            console.log(userId, "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
+            var msg = await db.get().collection(consts.adminmessage).find({ UserId: objectId(userId) }).toArray()
+            if (msg) {
+                console.log(msg);
+                resolve(msg)
+            }
+            else {
+                resolve(null)
+            }
+        })
+    },
+    Get_product_Details_For_Chat: (proId) => {
+        return new Promise(async (resolve, reject) => {
+            var pro = await db.get().collection(consts.adminmessage).aggregate([
+                {
+                    $match:
+                    {
+                        UserId: objectId(proId)
+                    }
+                },
+                {
+                    $project:
+                    {
+                        _id: 1,
+                        UserId: 1,
+                        ProId: 1,
+                        message: 1,
+                        Date: 1
+                    }
+                },
+                {
+                    $lookup:
+                    {
+
+                        from: consts.product_Base,
+                        localField: "ProId",
+                        foreignField: "_id",
+                        as: "products"
+                    }
+                },
+                {
+                    $project:
+                    {
+                        _id: 1,
+                        UserId: 1,
+                        ProId: 1,
+                        message: 1,
+                        Date: 1,
+                        products:
+                        {
+                            $arrayElemAt: ['$products', 0]
+                        }
+                    }
+                }
+            ]).toArray()
+            console.log("##", pro);
+            resolve(pro)
+        })
     }
 }

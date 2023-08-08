@@ -1,9 +1,16 @@
 <div class="container-fluid">
-
+    <div class="row">
+        <div class="col-md-12 mt-5 pt-4 text-light text-center">
+            <h1
+                style="font-weight: 800;font-size: 60px;font-variant: initial;font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;">
+                YOUR ORDERS...</h1>
+        </div>
+    </div>
     <div class="row">
         {{#if info}}
+
         {{#each info}}
-        <div class="col-md-3  mt-5 p-5">
+        <div class="col-md-3  p-5">
             <div class="card m-auto p-3 text-center" style="width: 18rem; border-radius: 20px;">
                 <h5 class="card-title text-center ">{{this.products.pname}}</h5>
                 <img class="card-img-top " src="/adminpro-image/{{this.products._id}}1.jpg" alt="Card image cap"
@@ -22,9 +29,10 @@
         </div>
         {{/each}}
         {{else}}
-            <div class="col-md-12 mt-5 pt-5">
-                 <h1 class="mt-5" style="font-weight: 800; font-size: 200px;">Pleade Order Some Products....</h1>
-            </div>
+        <div class="col-md-12 mt-5 pt-5">
+            <h1 class="mt-5 text-center" style="font-weight: 800; font-size: 200px;">Pleade Order Some Products....
+            </h1>
+        </div>
         {{/if}}
     </div>
 </div>
