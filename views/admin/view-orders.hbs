@@ -7,7 +7,6 @@
                         <th scope="col">No</th>
                         <th scope="col">Products</th>
                         <th scope="col">Products Image</th>
-                        <th scope="col">Discription</th>
                         <th scope="col">Price</th>
                         <th scope="col">Quantity</th>
                         <th scope="col">Payment Method</th>
@@ -15,24 +14,33 @@
                         <th scope="col">Payment Date</th>
                         <th scope="col">User(Buy Products)</th>
                         <th scope="col">User Email</th>
+                        <th scope="col">Message To User</th>
                     </tr>
                 </thead>
                 <tbody>
                     {{#each pro}}
                     <tr>
-
-                        <td>{{@index}}</td>
-                        <td>{{this.pro.pname}}</td>
+                        <td class="pt-5">{{@index}}</td>
+                        <td class="pt-5">{{this.pro.pname}}</td>
                         <td><img src="/adminpro-image/{{this.pro._id}}1.jpg"
                                 style="width: 200px; height: 200px; border-radius: 20px;" alt=""></td>
-                        <td style="max-width: 90px;">{{this.pro.description}}</td>
-                        <td>{{this.pro.price}}</td>
-                        <td>{{this.qut}}</td>
-                        <td>{{this.pay}}</td>
-                        <td>{{this.status}}</td>
-                        <td>{{this.date}}</td>
-                        <td>{{this.user.user}}</td>
-                        <td>{{this.user.email}}</td>
+                        <td class="pt-5">{{this.pro.price}}/-</td>
+                        <td class="pt-5">{{this.qut}}</td>
+                        <td class="pt-5">{{this.pay}}</td>
+                        <td class="pt-5">{{this.status}}</td>
+                        <td class="pt-5">{{this.date}}</td>
+                        <td class="pt-5">{{this.user.user}}</td>
+                        <td class="pt-5">{{this.user.email}}</td>
+                        <td>
+                            <form action="/admin/usermessage?userid={{this.userId}}&proid={{this.pro._id}}" method="post">
+                                <div class="form-group">
+                                    <label for="exampleInputPassword1">Message</label>
+                                    <textarea type="" name="message" class="form-control" id="exampleInputPassword1"
+                                        placeholder="Message"></textarea>
+                                </div>
+                                <button type="submit" style="width: 100%;" class="btn btn-primary">Submit</button>
+                            </form>
+                        </td>
                     </tr>
                     {{/each}}
                 </tbody>

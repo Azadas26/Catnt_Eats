@@ -21,6 +21,7 @@
     "nodemon": "^2.0.22",
     "otp-generator": "^4.0.1",
     "promise": "^8.3.0",
+    "qrcode": "^1.5.3",
     "razorpay": "^2.8.6",
     "twilio": "^4.11.2"
   }

@@ -1,39 +1,30 @@
 <div class="container-fluid">
+
     <div class="row">
-        <div class="col-md-12 mt-5 p-5">
-            <table class="table text-light">
-                <thead>
-                    <tr>
-                        <th scope="col">No</th>
-                        <th scope="col">Products</th>
-                        <th scope="col">Products Image</th>
-                        <th scope="col">Discription</th>
-                        <th scope="col">Price</th>
-                        <th scope="col">Quantity</th>
-                        <th scope="col">Payment Method</th>
-                        <th scope="col"> Status</th>
-                        <th scope="col">Payment Date</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {{#each info}}
-                    <tr>
-
-                        <td>{{@index}}</td>
-                        <td>{{this.products.pname}}</td>
-                        <td><img src="/adminpro-image/{{this.products._id}}1.jpg" style="width: 200px; height: 200px;"
-                                alt=""></td>
-                        <td style="max-width: 90px;">{{this.products.description}}</td>
-                        <td>{{this.products.price}}</td>
-                        <td>{{this.quantity}}</td>
-                        <td>{{this.pay}}</td>
-                        <td>{{this.status}}</td>
-                        <td>{{this.date}}</td>
-
-                    </tr>
-                    {{/each}}
-                </tbody>
-            </table>
+        {{#if info}}
+        {{#each info}}
+        <div class="col-md-3  mt-5 p-5">
+            <div class="card m-auto p-3 text-center" style="width: 18rem; border-radius: 20px;">
+                <h5 class="card-title text-center ">{{this.products.pname}}</h5>
+                <img class="card-img-top " src="/adminpro-image/{{this.products._id}}1.jpg" alt="Card image cap"
+                    height="200px">
+                <div class="card-body">
+                    <h5 class="card-title text-center">Price : ₹{{this.total}}/-</h5>
+                    <h5 class="card-title text-center">Quantity : {{this.quantity}}UTS</h5>
+                    <h5 class="card-title text-center">Payment Type : {{this.pay}}</h5>
+                    <h5 class="card-title text-center p-1" style="background-color: rgb(163, 233, 66);">{{this.status}}
+                    </h5>
+                    <h5 class="card-title text-center">{{this.date}}</h5>
+                    <img class="card-img-top " src="/javascripts/qrcodes/{{this._id}}.png" alt="Card image cap"
+                        height="auto">
+                </div>
+            </div>
         </div>
+        {{/each}}
+        {{else}}
+            <div class="col-md-12 mt-5 pt-5">
+                 <h1 class="mt-5" style="font-weight: 800; font-size: 200px;">Pleade Order Some Products....</h1>
+            </div>
+        {{/if}}
     </div>
 </div>

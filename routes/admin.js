@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var adminbase = require('../database/admin_base')
+var objectId = require('mongodb').ObjectId;
 
 
 var verfyAdmin = (req, res, next) => {
@@ -114,7 +115,35 @@ router.get('/orders',verfyAdmin,(req,res)=>
 {
   adminbase.Get_Order_Details_From_User_side().then((info)=>
   {
+    //console.log(info);
      res.render('./admin/view-orders',{admin:true,pro:info})
+  })
+})
+router.get('/giveproducts',verfyAdmin,(req,res)=>
+{
+  console.log(req.query.id);
+  adminbase.Get_Order_By_Scanning(req.query.id).then((info) => {
+    //console.log(info);
+    res.render('./admin/giveproduct',{admin:true,info})
+  })
+})
+router.get('/adminorder',verfyAdmin,(req,res)=>
+{
+   console.log(req.query.id,"***************",req.query.userid);
+   console.log('DDDDDD');
+   adminbase.Remove_user_Orders_after_admin_Validated(req.query.id,req.query.userid).then((data)=>
+   {
+        res.redirect('/admin')
+   })
+})
+router.post('/usermessage',(req,res)=>
+{
+   console.log(req.body);
+   console.log(req.query);
+  adminbase.Admin_Message_TO_Usewr(req.query.userid,req.query.proid,req.body).then((data)=>
+  {
+    console.log(data);
+    res.redirect('/admin/orders')
   })
 })
 

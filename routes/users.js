@@ -7,6 +7,8 @@ const userbase = require('../database/user_base');
 const session = require('express-session');
 const { LogContextImpl } = require('twilio/lib/rest/serverless/v1/service/environment/log');
 const objectId = require('mongodb').ObjectId
+const qrcode = require('../public/javascripts/qrcode');
+const { parseConnectionString } = require('mongodb/lib/core');
 
 const verfyUserLogin = (req, res, next) => {
   if (req.session.status) {
@@ -32,16 +34,19 @@ var successcut = false
 router.get('/', function (req, res, next) {
   if (req.session.status) {
     userbase.Get_Cart_Count(req.session.user._id).then((count) => {
-      userbase.Get_Products({ type: "Heavy_food" }).then((pro) => {
-        var pro1 = pro[0]
-       // pro.shift()
-        //console.log(pro);
-        userbase.Get_Products({ type: "Snacks" }).then((pro2) => {
-          userbase.Get_Products({ type: "Carbonate_drinks" }).then((pro3) => {
-            userbase.Get_Products({ type: "Minaral_water" }).then((pro4) => {
-              userbase.Get_Products({ type: "Candy" }).then((pro5) => {
-                userbase.Get_Products({ type: "Others" }).then((pro6) => {
-                  res.render('./user/first-page', { admin: false, user: req.session.user, pro1, pro, pro2, pro3, pro4, pro5, pro6, count })
+      userbase.Admin_Message(req.session.user._id).then((msg) => {
+        userbase.Get_Products({ type: "Heavy_food" }).then((pro) => {
+          var pro1 = pro[0]
+          // pro.shift()
+          //console.log(pro);
+          userbase.Get_Products({ type: "Snacks" }).then((pro2) => {
+            userbase.Get_Products({ type: "Carbonate_drinks" }).then((pro3) => {
+              userbase.Get_Products({ type: "Minaral_water" }).then((pro4) => {
+                userbase.Get_Products({ type: "Candy" }).then((pro5) => {
+                  userbase.Get_Products({ type: "Others" }).then((pro6) => {
+                    res.render('./user/first-page', { msg, admin: false, user: req.session.user, pro1, pro, pro2, pro3, pro4, pro5, pro6, count })
+
+                  })
 
                 })
 
@@ -50,9 +55,7 @@ router.get('/', function (req, res, next) {
             })
 
           })
-
         })
-
 
       })
     })
@@ -61,8 +64,8 @@ router.get('/', function (req, res, next) {
     userbase.Get_Products({ type: "Heavy_food" }).then((pro) => {
       var pro1 = pro[0]
       // pro.shift()
+      //console.log(pro);
       console.log(pro);
-      // console.log(pro);
       userbase.Get_Products({ type: "Snacks" }).then((pro2) => {
         userbase.Get_Products({ type: "Carbonate_drinks" }).then((pro3) => {
           userbase.Get_Products({ type: "Minaral_water" }).then((pro4) => {
@@ -114,9 +117,9 @@ router.post('/signup', (req, res) => {
 
 
       const accountSid = 'AC86bf867d4974f0444cb887bebebdebda';
-      
+
       const authToken = '1f61bc99e54d15bd7141adb29054e88f';
-      
+
       const twilioPhoneNumber = '+13158886211';
 
       function generateOTP() {
@@ -181,7 +184,9 @@ router.post('/otp', (req, res) => {
 router.get('/reotp', (req, res) => {
 
   const accountSid = 'AC86bf867d4974f0444cb887bebebdebda';
-  const authToken = '840d7888ac33a6ab7a232fe515f6c3da';
+
+  const authToken = '1f61bc99e54d15bd7141adb29054e88f';
+
   const twilioPhoneNumber = '+13158886211';
 
   function generateOTP() {
@@ -290,7 +295,9 @@ router.get('/viewcart', verfyUserLogin, (req, res) => {
     })
   })
 })
-router.get('/placeorder', verfyUserLogin, (req, res) => {
+router.get('/placeorder', verfyUserLogin, async (req, res) => {
+
+
   userbase.Get_Total_price(req.session.user._id).then((total) => {
     if (total == 0) {
       res.redirect('/viewcart')
@@ -306,6 +313,7 @@ router.post('/placeorder', (req, res) => {
   req.body.date = new Date()
   req.body.userId = objectId(req.session.user._id)
   console.log(req.body);
+
   userbase.Get_products_From_Cart_Base(req.session.user._id).then((pro) => {
     console.log(pro);
     userbase.Get_Total_price(req.session.user._id).then((total) => {
@@ -313,8 +321,9 @@ router.post('/placeorder', (req, res) => {
       req.body.total = total;
       req.body.status = req.body.pay === 'cod' ? 'placed' : 'penting';
       console.log(req.body);
-      userbase.Get_order_placement(req.body).then((orderId) => {
+      userbase.Get_order_placement(req.body).then(async (orderId) => {
 
+        await qrcode.GenerateOrder_Qr_Code(orderId).then((data) => { console.log(data); })
         if (req.body.pay === 'cod') {
           res.json({ codstatus: true })
         }
@@ -336,6 +345,7 @@ router.get('/afterplaced', (req, res) => {
 router.get('/vieworder', verfyUserLogin, (req, res) => {
   userbase.View_Orders_fROM_ORDER_bASE(req.session.user._id).then((info) => {
     console.log(info);
+
     res.render('./user/view-order', { admin: false, info, user: req.session.user })
   })
 })

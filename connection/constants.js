@@ -5,5 +5,6 @@ module.exports=
     product_Base:"Product_Base",
     product_Base_Duplicate:"Products_Base_Duplicate",
     cart_Base:"Cart_Base",
-    orders_Base:"Orders_Base"
+    orders_Base:"Orders_Base",
+    adminmessage:"Admin_Message"
 }
