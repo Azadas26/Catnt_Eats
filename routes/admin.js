@@ -37,8 +37,13 @@ router.post('/login', (req, res) => {
     }
   })
 })
+router.get('/logout',(req,res)=>
+{
+  req.session.admin = null
+  res.redirect('/admin')
+})
 router.get('/add', verfyAdmin, (req, res) => {
-  res.render('./admin/add-product', { admin: true })
+  res.render('./admin/add-product', { admin: true ,adminlog:true})
 })
 router.post('/add', verfyAdmin, (req, res) => {
   req.body.qun = parseInt(req.body.qun)
@@ -68,7 +73,7 @@ router.post('/add', verfyAdmin, (req, res) => {
 })
 router.get('/viewpro', verfyAdmin, (req, res) => {
   adminbase.Get_All_Products().then((pro) => {
-    res.render('./admin/view-products', { admin: true, pro })
+    res.render('./admin/view-products', { admin: true, pro,adminlog:true })
   })
 })
 router.get('/detete', verfyAdmin, (req, res) => {
@@ -78,7 +83,7 @@ router.get('/detete', verfyAdmin, (req, res) => {
 })
 router.get('/edit', (req, res) => {
   adminbase.Find_One_product_For_Editing(req.query.id).then((pro) => {
-    res.render('./admin/edit-page', { admin: true, pro })
+    res.render('./admin/edit-page', { admin: true, pro ,adminlog:true})
   })
 })
 router.post('/edit',verfyAdmin, (req, res) => {
@@ -116,7 +121,7 @@ router.get('/orders',verfyAdmin,(req,res)=>
   adminbase.Get_Order_Details_From_User_side().then((info)=>
   {
     //console.log(info);
-     res.render('./admin/view-orders',{admin:true,pro:info})
+     res.render('./admin/view-orders',{admin:true,pro:info,adminlog:true})
   })
 })
 router.get('/giveproducts',verfyAdmin,(req,res)=>
@@ -124,7 +129,7 @@ router.get('/giveproducts',verfyAdmin,(req,res)=>
   console.log(req.query.id);
   adminbase.Get_Order_By_Scanning(req.query.id).then((info) => {
     //console.log(info);
-    res.render('./admin/giveproduct',{admin:true,info})
+    res.render('./admin/giveproduct',{admin:true,info,adminlog:true})
   })
 })
 router.get('/adminorder',verfyAdmin,(req,res)=>
@@ -133,7 +138,7 @@ router.get('/adminorder',verfyAdmin,(req,res)=>
    console.log('DDDDDD');
    adminbase.Remove_user_Orders_after_admin_Validated(req.query.id,req.query.userid).then((data)=>
    {
-        res.redirect('/admin')
+        res.redirect('/admin/viewpro')
    })
 })
 router.post('/usermessage',(req,res)=>

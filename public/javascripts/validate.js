@@ -1,17 +1,70 @@
-document.ready(function () {
+$(document).ready(() => {
+    $("#order").validate({
+      rules: {
+        ph: {
+          required: true,
+          minlength: 10,
+          maxlength: 10,
+        },
+        pin: {
+          required: true,
+          minlength: 6,
+          maxlength: 6,
+        },
+      },
+    });
+    // Add a custom validation method for the name field
+    $.validator.addMethod(
+      "startsWithLetter",
+      function (value, element) {
+        return this.optional(element) || /^[A-Za-z]/.test(value);
+      },
+      "Name must start with a letter."
+    );
+  
+    // Initialize the validation for your form
     $("#usersignup").validate({
-        rules:
-        {
-            name:
-            {
-                required: true,
-                minlength: 4,
-                maxlength:10
-            },
-            ph:
-            {
-
-            }
+      rules: {
+        name: {
+          required: true,
+          startsWithLetter: true, // Use the custom validation method
+        },
+        email: {
+          required: true,
+          email: true,
+        },
+        password: {
+          required: true,
+        },
+        ph: {
+          required: true,
+          minlength: 10,
+          maxlength: 10,
         }
-    })
-})
+      },
+    });
+    $("#wksignupform").validate({
+      rules: {
+        name: {
+          required: true,
+          startsWithLetter: true, // Use the custom validation method
+        },
+        email: {
+          required: true,
+          email: true,
+        },
+        password: {
+          required: true,
+        },
+        ph: {
+          required: true,
+          minlength: 10,
+          maxlength: 10,
+        },
+        image: {
+          required: true,
+        },
+      },
+    });
+  });
+  

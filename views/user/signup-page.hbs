@@ -69,11 +69,18 @@
 
 <script>
     $(document).ready(() => {
+         $.validator.addMethod(
+      "startsWithLetter",
+      function (value, element) {
+        return this.optional(element) || /^[A-Za-z]/.test(value);
+      },
+      "Name must start with a letter."
+    );
         $("#usersignup").validate({
             rules: {
                 name: {
                     required: true,
-                    minlength: 5,
+                    startsWithLetter:true
                 },
                 ph: {
                     required: true,
@@ -84,6 +91,10 @@
                     required:true,
                     minlength:3,
                     maxlength:10
+                },
+                email:{
+                    required:true,
+                    email:true
                 }
             }
         })

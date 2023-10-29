@@ -12,13 +12,13 @@ var instance = new Razorpay({
 
 
 module.exports =
-{
+{ 
     Do_Signup: (info) => {
         console.log(info);
         return new Promise(async (resolve, reject) => {
             info.password = await bcrypt.hash(info.password, 10)
             db.get().collection(consts.user_Base).insertOne(info).then((data) => {
-                console.log(data);
+            console.log(data);
                 resolve(data)
             })
         })
@@ -439,6 +439,23 @@ module.exports =
             ]).toArray()
             console.log("##", pro);
             resolve(pro)
+        })
+    },
+    To_verify_EmailAddress_Already_Exist_OR_NoT : (info)=>
+    {
+        return new Promise(async(resolve,reject)=>
+        {
+            await db.get().collection(consts.user_Base).findOne({email:info.email}).then((data)=>
+            {
+                if(data)
+                {
+                    resolve(true)
+                }
+                else
+                {
+                    resolve(false)
+                }
+            })
         })
     }
 }
